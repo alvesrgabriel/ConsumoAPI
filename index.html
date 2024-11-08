@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro e Edição de Receitas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="style.css" rel="stylesheet" />
+</head>
+
+<body>
+
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Cadastro e Edição de Receitas, Ingredientes e Usuários</h1>
+
+        <!-- Formulário de Receita -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <h4 class="card-title">Cadastro de Receita</h4>
+                <form id="form-receita">
+                    <div class="mb-3">
+                        <label for="nomeReceita" class="form-label">Nome da Receita</label>
+                        <input type="text" class="form-control" id="nomeReceita" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="tempoPreparo" class="form-label">Tempo de Preparo</label>
+                        <input type="time" class="form-control" id="tempoPreparo" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="modoPreparo" class="form-label">Modo de Preparo</label>
+                        <textarea class="form-control" id="modoPreparo" rows="3" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="descricao" class="form-label">Descrição</label>
+                        <textarea class="form-control" id="descricao" rows="3" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Cadastrar Receita</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Formulário de Ingredientes -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <h4 class="card-title">Cadastro de Ingredientes</h4>
+                <form id="form-ingrediente">
+                    <div class="mb-3">
+                        <label for="nomeIngrediente" class="form-label">Nome do Ingrediente</label>
+                        <input type="text" class="form-control" id="nomeIngrediente" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="quantidade" class="form-label">Quantidade</label>
+                        <input type="number" step="0.01" class="form-control" id="quantidade" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="unidadeMedida" class="form-label">Unidade de Medida</label>
+                        <input type="text" class="form-control" id="unidadeMedida" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Cadastrar Ingrediente</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Formulário de Usuário -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <h4 class="card-title">Cadastro de Usuário</h4>
+                <form id="form-usuario">
+                    <div class="mb-3">
+                        <label for="nomeUsuario" class="form-label">Nome</label>
+                        <input type="text" class="form-control" id="nomeUsuario" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="senha" class="form-label">Senha</label>
+                        <input type="password" class="form-control" id="senha" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Cadastrar Usuário</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Edição de Receita -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <h4 class="card-title">Editar Receita</h4>
+                <form id="form-editar-receita">
+                    <div class="mb-3">
+                        <label for="idReceita" class="form-label">ID da Receita</label>
+                        <input type="number" class="form-control" id="idReceita" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="nomeReceitaEditar" class="form-label">Nome da Receita</label>
+                        <input type="text" class="form-control" id="nomeReceitaEditar" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="tempoPreparoEditar" class="form-label">Tempo de Preparo</label>
+                        <input type="time" class="form-control" id="tempoPreparoEditar" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="modoPreparoEditar" class="form-label">Modo de Preparo</label>
+                        <textarea class="form-control" id="modoPreparoEditar" rows="3" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="descricaoEditar" class="form-label">Descrição</label>
+                        <textarea class="form-control" id="descricaoEditar" rows="3" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-success">Editar Receita</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Edição de Ingrediente -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <h4 class="card-title">Editar Ingrediente</h4>
+                <form id="form-editar-ingrediente">
+                    <div class="mb-3">
+                        <label for="idIngrediente" class="form-label">ID do Ingrediente</label>
+                        <input type="number" class="form-control" id="idIngrediente" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="nomeIngredienteEditar" class="form-label">Nome do Ingrediente</label>
+                        <input type="text" class="form-control" id="nomeIngredienteEditar" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="quantidadeEditar" class="form-label">Quantidade</label>
+                        <input type="number" step="0.01" class="form-control" id="quantidadeEditar" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="unidadeMedidaEditar" class="form-label">Unidade de Medida</label>
+                        <input type="text" class="form-control" id="unidadeMedidaEditar" required>
+                    </div>
+                    <button type="submit" class="btn btn-success">Editar Ingrediente</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Edição de Usuário -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <h4 class="card-title">Editar Usuário</h4>
+                <form id="form-editar-usuario">
+                    <div class="mb-3">
+                        <label for="idUsuario" class="form-label">ID do Usuário</label>
+                        <input type="number" class="form-control" id="idUsuario" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="nomeUsuarioEditar" class="form-label">Nome</label>
+                        <input type="text" class="form-control" id="nomeUsuarioEditar" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="emailEditar" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="emailEditar" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="senhaEditar" class="form-label">Senha</label>
+                        <input type="password" class="form-control" id="senhaEditar" required>
+                    </div>
+                    <button type="submit" class="btn btn-success">Editar Usuário</button>
+                </form>
+            </div>
+        </div>
+
+
+
+
+        <div class="card mb-4">
+            <div class="card-body">
+                <h4 class="card-title">Deletar Receita</h4>
+                <form id="form-deletar-receita">
+                    <div class="mb-3">
+                        <label for="idReceitaDeletar" class="form-label">ID da Receita</label>
+                        <input type="number" class="form-control" id="idReceitaDeletar" required>
+                    </div>
+                    <button type="submit" class="btn btn-danger">Deletar Receita</button>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Deletar Ingrediente -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <h4 class="card-title">Deletar Ingrediente</h4>
+                <form id="form-deletar-ingrediente">
+                    <div class="mb-3">
+                        <label for="idIngredienteDeletar" class="form-label">ID do Ingrediente</label>
+                        <input type="number" class="form-control" id="idIngredienteDeletar" required>
+                    </div>
+                    <button type="submit" class="btn btn-danger">Deletar Ingrediente</button>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Deletar Usuário -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <h4 class="card-title">Deletar Usuário</h4>
+                <form id="form-deletar-usuario">
+                    <div class="mb-3">
+                        <label for="idUsuarioDeletar" class="form-label">ID do Usuário</label>
+                        <input type="number" class="form-control" id="idUsuarioDeletar" required>
+                    </div>
+                    <button type="submit" class="btn btn-danger">Deletar Usuário</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="main.js"></script>
+</body>
+
+</html>
