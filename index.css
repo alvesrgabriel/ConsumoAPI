@@ -1,0 +1,41 @@
+body {
+    padding-top: 50px;
+}
+
+.form-container {
+    background-color: #f8f9fa;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-family: 'Arial', sans-serif;
+    color: #343a40;
+    margin-bottom: 30px;
+}
+
+.btn-custom {
+    background-color: #007bff;
+    color: white;
+}
+
+.btn-custom:hover {
+    background-color: #0056b3;
+}
+
+.receita-item {
+    background-color: #ffffff;
+    margin-bottom: 15px;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.receita-item p {
+    margin: 0;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}

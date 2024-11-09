@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Editar Receita</title>
+</head>
+<body>
+  <h1>Editar Receita</h1>
+  
+  <!-- Formulário para editar a receita -->
+  <form id="editar-receita-form">
+    <label for="nome">Nome:</label>
+    <input type="text" id="nome" name="nome" required />
+    
+    <label for="tempoPreparo">Tempo de preparo:</label>
+    <input type="time" id="tempoPreparo" name="tempoPreparo" required />
+
+    <label for="modoPreparo">Modo de preparo:</label>
+    <input type="text" id="modoPreparo" name="modoPreparo" required />
+    
+    <label for="descricao">Descrição:</label>
+    <input type="text" id="descricao" name="descricao" required />
+
+    <label for="ingredientes">ingredientes:</label>
+    <input type="text" id="ingredientes" name="ingredientes" required />
+    
+    <button type="submit">Salvar Alterações</button>
+  </form>
+
+  <script>
+    async function carregarReceita() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const id = urlParams.get("id");
+
+      const resposta = await fetch(`http://localhost:3031/mostrar`);
+      const receitas = await resposta.json();
+      const receita = receitas.find((receita) => receita.id == id);
+
+      if (receita) {
+        document.getElementById("nome").value = receita.nome;
+        document.getElementById("tempoPreparo").value = receita.tempoPreparo;
+        document.getElementById("modoPreparo").value = receita.modoPreparo;
+        document.getElementById("descricao").value = receita.descricao;
+        document.getElementById("ingredientes").value = receita.ingredientes;
+      } else {
+        alert("Receita não encontrada.");
+        window.location.href = "index.html";
+      }
+    }
+
+    async function salvarAlteracoes(event) {
+      event.preventDefault();
+      const urlParams = new URLSearchParams(window.location.search);
+      const id = urlParams.get("id");
+
+      const nome = document.getElementById("nome").value;
+      const tempoPreparo = document.getElementById("tempoPreparo").value;
+      const modoPreparo = document.getElementById("modoPreparo").value;
+      const descricao = document.getElementById("descricao").value;
+      const ingredientes = document.getElementById("ingredientes").value;
+
+      const resposta = await fetch(`http://localhost:3031/editar/${id}/${nome}/${tempoPreparo}/${modoPreparo}/${descricao}/${ingredientes}`);
+
+      if (resposta.ok) {
+        alert("Receita atualizada com sucesso!");
+        window.location.href = "index.html";
+      } else {
+        alert("Erro ao atualizar receita.");
+      }
+    }
+
+    // Carrega os dados da receita ao abrir a página
+    window.onload = carregarReceita;
+
+    // Adiciona evento para salvar as alterações
+    document.getElementById("editar-receita-form").addEventListener("submit", salvarAlteracoes);
+  </script>
+</body>
+</html>
