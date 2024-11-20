@@ -6,47 +6,57 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gerenciar Receitas</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="index.css">
 </head>
 
 <body>
-  <div class="container">
-    <h1 class="text-center">Lista de Receitas</h1>
+  <div class="container py-5">
+    <h1 class="text-center mb-4">Lista de Receitas</h1>
 
     <!-- Formulário para adicionar uma nova receita -->
-    <div class="form-container">
+    <div class="card p-4 mb-5">
       <form id="receita-form">
-        <div class="form-group">
-          <label for="nome">Nome da Receita:</label>
+        <div class="mb-3">
+          <label for="nome" class="form-label">Nome da Receita:</label>
           <input type="text" class="form-control" id="nome" name="nome" required />
         </div>
 
-        <div class="form-group">
-          <label for="tempoPreparo">Tempo de preparo:</label>
-          <input type="time" class="form-control" id="tempoPreparo" name="tempoPreparo" required />
+        <div class="mb-3">
+          <label for="tempoPreparo" class="form-label">Tempo de preparo:</label>
+          <div class="d-flex align-items-center">
+            <input type="number" class="form-control me-2" id="tempoPreparoHoras" name="tempoPreparoHoras" placeholder="Horas" min="0" required />
+            <input type="number" class="form-control me-2" id="tempoPreparoMinutos" name="tempoPreparoMinutos" placeholder="Minutos" min="0" max="59" required />
+          </div>
         </div>
 
-        <div class="form-group">
-          <label for="modoPreparo">Modo de preparo:</label>
-          <input type="text" class="form-control" id="modoPreparo" name="modoPreparo" required />
+        <div class="mb-3">
+          <label for="modoPreparo" class="form-label">Modo de preparo:</label>
+          <textarea class="form-control" id="modoPreparo" name="modoPreparo" rows="3" required></textarea>
         </div>
 
-        <div class="form-group">
-          <label for="descricao">Descrição:</label>
-          <input type="text" class="form-control" id="descricao" name="descricao" required />
+        <div class="mb-3">
+          <label for="descricao" class="form-label">Descrição:</label>
+          <textarea class="form-control" id="descricao" name="descricao" rows="2" required></textarea>
         </div>
 
-        <div class="form-group">
-          <label for="ingredientes">Ingredientes:</label>
-          <input type="text" class="form-control" id="ingredientes" name="ingredientes" required />
+        <div class="mb-3">
+          <label for="ingredientes" class="form-label">Ingredientes:</label>
+          <textarea class="form-control" id="ingredientes" name="ingredientes" rows="2" required></textarea>
         </div>
 
-        <button type="submit" class="btn btn-custom btn-block">Adicionar Receita</button>
+        <button type="submit" class="btn btn-success w-100">Adicionar Receita</button>
       </form>
     </div>
 
+    <!-- Spinner de carregamento -->
+    <div id="loading-spinner" class="text-center py-4 d-none">
+      <div class="spinner-border text-success" role="status"></div>
+      <p>Carregando receitas...</p>
+    </div>
+
     <!-- Container para mostrar as receitas -->
-    <div id="receita-container" class="mt-5">
+    <div id="receita-container" class="row">
       <!-- As receitas serão carregadas aqui -->
     </div>
   </div>
@@ -54,29 +64,42 @@
   <script>
     // Função para carregar as receitas da API
     async function carregarReceitas() {
-      const resposta = await fetch("http://localhost:3031/mostrar");
-      const receitas = await resposta.json();
+      const spinner = document.getElementById("loading-spinner");
+      spinner.classList.remove("d-none");
 
-      const container = document.getElementById("receita-container");
-      container.innerHTML = "";
+      try {
+        const resposta = await fetch("http://localhost:3031/mostrar");
+        const receitas = await resposta.json();
 
-      receitas.forEach((receita) => {
-        const receitaDiv = document.createElement("div");
-        receitaDiv.classList.add("receita-item");
+        const container = document.getElementById("receita-container");
+        container.innerHTML = "";
 
-        receitaDiv.innerHTML = `
-          <p><strong>Nome:</strong> ${receita.nome}</p>
-          <p><strong>Tempo de preparo:</strong> ${receita.tempoPreparo}</p>
-          <p><strong>Modo de preparo:</strong> ${receita.modoPreparo}</p>
-          <p><strong>Descrição:</strong> ${receita.descricao}</p>
-          <p><strong>Ingredientes:</strong> ${receita.ingredientes}</p>
-          <div class="d-flex justify-content-between">
-            <button class="btn btn-danger btn-sm" onclick="deletarReceita(${receita.id})">Deletar</button>
-            <button class="btn btn-warning btn-sm" onclick="editarReceita(${receita.id})">Editar</button>
-          </div>
-        `;
-        container.appendChild(receitaDiv);
-      });
+        receitas.forEach((receita) => {
+          const receitaDiv = document.createElement("div");
+          receitaDiv.classList.add("col-md-6", "col-lg-4", "mb-4");
+
+          receitaDiv.innerHTML = `
+            <div class="card p-3 h-100">
+              <p><strong>Nome:</strong> ${receita.nome}</p>
+              <p><strong>Tempo de preparo:</strong> ${receita.tempoPreparo}</p>
+              <p><strong>Modo de preparo:</strong> ${receita.modoPreparo}</p>
+              <p><strong>Descrição:</strong> ${receita.descricao}</p>
+              <p><strong>Ingredientes:</strong> ${receita.ingredientes}</p>
+              <div class="d-flex justify-content-between mt-3">
+                <button class="btn btn-danger btn-sm" onclick="deletarReceita(${receita.id})">
+                  <i class="fas fa-trash-alt"></i> Deletar
+                </button>
+                <button class="btn btn-warning btn-sm" onclick="editarReceita(${receita.id})">
+                  <i class="fas fa-edit"></i> Editar
+                </button>
+              </div>
+            </div>
+          `;
+          container.appendChild(receitaDiv);
+        });
+      } finally {
+        spinner.classList.add("d-none");
+      }
     }
 
     // Função para adicionar uma nova receita
@@ -84,7 +107,9 @@
       event.preventDefault();
 
       const nome = document.getElementById("nome").value;
-      const tempoPreparo = document.getElementById("tempoPreparo").value;
+      const tempoPreparoHoras = document.getElementById("tempoPreparoHoras").value;
+      const tempoPreparoMinutos = document.getElementById("tempoPreparoMinutos").value;
+      const tempoPreparo = `${tempoPreparoHoras}h ${tempoPreparoMinutos}min`;
       const modoPreparo = document.getElementById("modoPreparo").value;
       const descricao = document.getElementById("descricao").value;
       const ingredientes = document.getElementById("ingredientes").value;
@@ -93,8 +118,8 @@
 
       if (resposta.ok) {
         alert("Receita criada com sucesso!");
-        carregarReceitas(); // Atualiza a lista de receitas após adicionar
-        document.getElementById("receita-form").reset(); // Limpa o formulário
+        carregarReceitas();
+        document.getElementById("receita-form").reset();
       } else {
         alert("Erro ao criar receita.");
       }
@@ -106,13 +131,13 @@
 
       if (resposta.ok) {
         alert("Receita deletada com sucesso!");
-        carregarReceitas(); // Atualiza a lista de receitas após deletar
+        carregarReceitas();
       } else {
         alert("Erro ao deletar receita.");
       }
     }
 
-    // Função para editar a receita (redirecionamento para outra página)
+    // Função para editar a receita
     function editarReceita(id) {
       window.location.href = `editar.html?id=${id}`;
     }

@@ -1,41 +1,57 @@
+/* index.css */
+
+/* Fundo geral do aplicativo */
 body {
-    padding-top: 50px;
+  background-color: #fffaf0; /* Um tom claro e acolhedor */
+  font-family: 'Arial', sans-serif;
 }
 
-.form-container {
-    background-color: #f8f9fa;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
+/* Título principal */
 h1 {
-    font-family: 'Arial', sans-serif;
-    color: #343a40;
-    margin-bottom: 30px;
+  color: #d2691e; /* Tom de caramelo */
+  font-family: 'Georgia', serif;
+  text-shadow: 1px 1px #f5deb3; /* Sutil sombra para destaque */
 }
 
-.btn-custom {
-    background-color: #007bff;
-    color: white;
+/* Estilo dos cards */
+.card {
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: #fffaf0; /* Combina com o fundo geral */
 }
 
-.btn-custom:hover {
-    background-color: #0056b3;
+/* Botões */
+button {
+  font-weight: bold;
+  transition: background-color 0.3s, transform 0.2s;
 }
 
-.receita-item {
-    background-color: #ffffff;
-    margin-bottom: 15px;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+button:hover {
+  transform: scale(1.05);
 }
 
-.receita-item p {
-    margin: 0;
+.btn-success {
+  background-color: #6a9955; /* Tom de verde mais suave */
 }
 
-.form-group {
-    margin-bottom: 20px;
+.btn-success:hover {
+  background-color: #8dc78c; /* Efeito de hover */
+}
+
+.btn-danger {
+  background-color: #cc3300;
+}
+
+.btn-warning {
+  background-color: #ffc107;
+}
+
+/* Espaçamento entre os cards */
+#receita-container .col-md-6 {
+  margin-bottom: 20px;
+}
+
+/* Formulário */
+#receita-form .form-control {
+  border-radius: 8px;
 }
