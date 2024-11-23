@@ -12,10 +12,21 @@
 
 <body>
   <div class="container py-5">
-    <h1 class="text-center mb-4">Lista de Receitas</h1>
+    <h1 class="text-center mb-4">Receitas</h1>
+    <!-- Spinner de carregamento -->
+    <div id="loading-spinner" class="text-center py-4 d-none">
+      <div class="spinner-border text-success" role="status"></div>
+      <p>Carregando receitas...</p>
+    </div>
+
+    <!-- Container para mostrar as receitas -->
+    <div id="receita-container" class="row">
+      <!-- As receitas serão carregadas aqui -->
+    </div>
 
     <!-- Formulário para adicionar uma nova receita -->
     <div class="card p-4 mb-5">
+      <h1 class="text-center mb-4">Inserir Nova Receita</h1>
       <form id="receita-form">
         <div class="mb-3">
           <label for="nome" class="form-label">Nome da Receita:</label>
@@ -49,16 +60,6 @@
       </form>
     </div>
 
-    <!-- Spinner de carregamento -->
-    <div id="loading-spinner" class="text-center py-4 d-none">
-      <div class="spinner-border text-success" role="status"></div>
-      <p>Carregando receitas...</p>
-    </div>
-
-    <!-- Container para mostrar as receitas -->
-    <div id="receita-container" class="row">
-      <!-- As receitas serão carregadas aqui -->
-    </div>
   </div>
 
   <script>
